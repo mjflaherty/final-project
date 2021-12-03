@@ -1,3 +1,7 @@
+var currentScene = 1;
+
+
+
 //paste christmas tree code in here once completed with 1 task
 
 background(209, 209, 209);
@@ -35,3 +39,115 @@ mouseClicked = function (){
     //every time mouse is clicked, random image from ornaments array is put on the screen
     image(ornaments[round(random(0,ornaments.length))],mouseX - 10, mouseY - 10, 30, 30);
 };
+var Button = function(config) {
+    this.x = config.x || 0;
+    this.y = config.y || 0;
+    this.width = config.width || 75;
+    this.height = config.height || 50;
+    this.label = config.label || "Click";
+    this.onClick = config.onClick || function() {};
+};
+
+Button.prototype.draw = function() {
+    fill(90, 227, 245);
+    rect(this.x, this.y, this.width, this.height, 5);
+    fill(0, 0, 0);
+    textSize(19);
+    textAlign(LEFT, TOP);
+    text(this.label, this.x+10, this.y+this.height/4);
+};
+
+Button.prototype.isMouseInside = function() {
+    return mouseX > this.x &&
+           mouseX < (this.x + this.width) &&
+           mouseY > this.y &&
+           mouseY < (this.y + this.height);
+};
+
+Button.prototype.handleMouseClick = function() {
+    if (this.isMouseInside()) {
+        this.onClick();
+    }
+};
+var redButton = new Button({
+    x: 120,
+    y: 100,
+    label: "Red",
+    onClick: function() {
+        text("You made the right choice!", this.x, this.y+this.height);
+    
+    }
+});
+
+var orangeButton = new Button({
+    x: 120,
+    y: 100,
+    label: "Orange",
+    onClick: function() {
+        text("You made the right choice!", this.x, this.y+this.height);
+    
+    }
+});
+
+var yellowButton = new Button({
+    x: 120,
+    y: 100,
+    label: "Yellow",
+    onClick: function() {
+        text("You made the right choice!", this.x, this.y+this.height);
+    
+    }
+});
+
+var greenButton = new Button({
+    x: 120,
+    y: 100,
+    label: "Green",
+    onClick: function() {
+        text("You made the right choice!", this.x, this.y+this.height);
+    
+    }
+});
+
+var blueButton = new Button({
+    x: 120,
+    y: 100,
+    label: "Blue",
+    onClick: function() {
+        text("You made the right choice!", this.x, this.y+this.height);
+    
+    }
+});
+
+var purpleButton = new Button({
+    x: 120,
+    y: 100,
+    label: "Purple",
+    onClick: function() {
+        text("You made the right choice!", this.x, this.y+this.height);
+    
+    }
+});
+
+
+
+
+mouseClicked = function() {
+    redButton.handleMouseClick();
+   
+};
+
+var splashScreen = function () 
+{
+    background(255, 255, 255);
+    redButton.draw();
+    orangeButton.draw();
+    yellowButton.draw();
+    greenButton.draw();
+    blueButton.draw();
+    purpleButton.draw();
+    
+    
+};
+
+splashScreen();
