@@ -1,5 +1,84 @@
 //paste christmas tree code in here once completed with 1 task
 
+//meghan's bitmoji code
+var x = 100;
+var y = 100;
+
+//functions to draw bitmoji
+var drawBit = function (x,y,bitSize) {
+var drawHead = function (x,y,headSize) {
+       //face
+    stroke(255, 255, 255);
+    fill(255, 225, 189);
+    ellipse(x + (headSize/150 * 89),y + (headSize/150 * 71),headSize/150 * 68,headSize/150 * 90);
+    //neck
+    noStroke();
+rect(x + (headSize/150 * 83),y + (headSize/150 * 111),headSize/150 * 15,headSize/150 * 14);
+    //eyes
+    stroke(0, 0, 0);
+    fill(255, 255, 255);
+    ellipse(x + (headSize/150 * 76),y + (headSize/150 * 60),headSize/150 * 18,headSize/150 * 12);
+    ellipse(x + (headSize/150 * 105),y + (headSize/150 * 60),headSize/150 * 18,headSize/150 * 12);
+    fill(44, 97, 0);
+    ellipse(x + (headSize/150 * 76),y + (headSize/150 * 60),headSize/150 * 10,headSize/150 * 10);
+    ellipse(x + (headSize/150 * 105),y + (headSize/150 * 60),headSize/150 * 10,headSize/150 * 10);
+    fill(0, 0, 0);
+    ellipse(x + (headSize/150 * 105),y + (headSize/150 * 60),headSize/150 * 2,headSize/150 * 5);
+    ellipse(x + (headSize/150 * 76),y + (headSize/150 * 60),headSize/150 * 3,headSize/150 * 5);
+    //nose
+    stroke(0, 0, 0);
+    fill(255, 225, 189);
+    bezier(x + (headSize/150 * 91),y + (headSize/150 * 84),x + (headSize/150 * 80),y + (headSize/150 * 84),x + (headSize/150 * 113),y + (headSize/150 * 85),x + (headSize/150 * 92),y + (headSize/150 * 70));
+    //mouth
+    fill(252, 247, 247);
+    arc(x + (headSize/150 * 89),y + (headSize/150 * 94),headSize/150 * 30,headSize/150 * 13,1,180);
+    line(x + (headSize/150 * 74),y + (headSize/150 * 93),x + (headSize/150 * 103),y + (headSize/150 * 94));
+
+};
+drawHead(x,y,bitSize);
+
+var drawBody = function (x, y, headSize) {
+    //body
+    fill(148, 199, 227);
+    rect(x + (headSize/150 * 62),y + (headSize/150 * 124),headSize/150 * 55,headSize/150 * 85,10); 
+    //strings
+    line(x + (headSize/150 * 82),y + (headSize/150 * 162),x + (headSize/150 * 79),y + (headSize/150 * 123));
+    line(x + (headSize/150 * 99),y + (headSize/150 * 162),x + (headSize/150 * 100),y + (headSize/150 * 123));
+    fill(148, 199, 227);
+    ellipse(x + (headSize/150 * 82),y + (headSize/150 * 163),headSize/150 *5,headSize/150 *5);
+    ellipse(x + (headSize/150 * 100),y + (headSize/150 * 163),headSize/150 * 5,headSize/150 * 5);
+    //initials
+    line(x + (headSize/150 * 70),y + (headSize/150 * 200),x + (headSize/150 * 70),y + (headSize/150 * 179));
+    line(x + (headSize/150 * 77),y + (headSize/150 * 200),x + (headSize/150 * 70),y + (headSize/150 * 179));
+    line(x + (headSize/150 * 77),y + (headSize/150 * 200),x + (headSize/150 * 82),y + (headSize/150 * 179));
+    line(x + (headSize/150 * 85),y + (headSize/150 * 200),x + (headSize/150 * 82),y + (headSize/150 * 179));
+    line(x + (headSize/150 * 96),y + (headSize/150 * 200),x + (headSize/150 * 96),y + (headSize/150 * 179));
+    line(x + (headSize/150 * 106),y + (headSize/150 * 179),x + (headSize/150 * 96),y + (headSize/150 * 179));
+    line(x + (headSize/150 * 106),y + (headSize/150 * 189),x + (headSize/150 * 96),y + (headSize/150* 188));
+
+};
+drawBody (x,y,bitSize);
+
+var drawHairHat = function (x ,y, headSize) {
+    //hair
+    stroke(255, 255, 255);
+    fill(36, 4, 4);
+    bezier(x + (headSize/150 * 74),y + (headSize/150 * 28),x + (headSize/150 * -3),y + (headSize/150 * 137),x + (headSize/150 * 49),y + (headSize/150 * 139),x + (headSize/150 * 58),y + (headSize/150 * 177));
+    bezier(x + (headSize/150 * 104),y + (headSize/150 * 28),x + (headSize/150 * 145),y + (headSize/150 * 87),x + (headSize/150 * 171),y + (headSize/150 * 94),x + (headSize/150 * 125),y + (headSize/150 * 177));
+    triangle(x + (headSize/150 * 93),y + (headSize/150 * 28),x + (headSize/150 * 35),y + (headSize/150 * 91),x + (headSize/150 * 69),y + (headSize/150 * 27));
+    stroke(36, 4, 4);
+    //hat
+    fill(255, 255, 0);
+    triangle(x + (headSize/150 * 84),y + (headSize/150 * 32),x + (headSize/150 * 61),y + (headSize/150 * 32),x + (headSize/150 * 71),y + (headSize/150 * 3));
+    triangle(x + (headSize/150 * 99),y + (headSize/150 * 32),x + (headSize/150 * 80),y + (headSize/150 * 32),x + (headSize/150 * 88),y + (headSize/150 * 3));
+    triangle(x + (headSize/150 * 114),y + (headSize/150 * 32),x + (headSize/150 * 94),y + (headSize/150 * 32),x + (headSize/150 * 106),y + (headSize/150 * 3));
+
+};
+  
+drawHairHat (x,y,bitSize);
+
+};
+
 //claudia's bitmoji code
 var drawFace = function(bitmojiX, bitmojiY, h){
     noStroke();
@@ -195,6 +274,17 @@ mouseClicked = function (){
     purpleButton.handleMouseClick();
 };
 
+var smallTree = function (j,y) 
+ {
+    noStroke();
+        fill(37,82,0);
+        triangle(53+j,72+y,29+j,134+y,76+j,134+y);
+        fill(77,73,66);
+        rect(46 + j,133 + y,11,17);
+    
+ };
+ 
+  
 var splashScreen = function () 
 {
     background(255, 255, 255);
@@ -202,6 +292,7 @@ var splashScreen = function ()
     text("Created by: Claudia Deverdits and Meghan Flaherty", 27, 387);
     textSize(30);
     text("Decorate A Christmas Tree!", 18, 50);
+    drawBit(217,260,80);
     drawBitmoji(82, 260, 40);
     redButton.draw();
     orangeButton.draw();
@@ -209,6 +300,12 @@ var splashScreen = function ()
     greenButton.draw();
     blueButton.draw();
     purpleButton.draw();
+    for (var i = 0; i < 266; i++)
+  {
+      smallTree(62*i,0);
+  }
+    text("Welcome to the game! Please select the color of tree you would like to decorate.",96,162,250,100);
+ 
 };
 
 splashScreen();
