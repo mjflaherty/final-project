@@ -149,11 +149,11 @@ var currentScene = "splash";
 background(209, 209, 209);
 
 //function to draw christmas tree (no need for parameters yet bc tree doesn't need to ever be moved)
-var christmasTree = function(){
+var christmasTree = function(treeColor){
 noStroke();
 fill(77, 73, 66);
 rect(170, 264, 64, 100);
-fill(37, 82, 0);
+fill(treeColor);
 triangle(90, 160, 310, 160, 200, 45);
 triangle(50, 240, 350, 240, 200, 75);
 triangle(25, 320, 375, 320, 200, 130);
@@ -161,7 +161,7 @@ image(getImage("space/star"), 153, -17);
 };
 
 //call the function to make it draw
-christmasTree();
+
 
 //array of ornaments
 var ornaments = [
@@ -213,6 +213,8 @@ var redButton = new Button({
     label: "Red",
     onClick: function() {
         currentScene = "red";
+        background(255, 255, 255);
+        christmasTree(color(179, 69, 69));
     }
 });
 
@@ -222,6 +224,8 @@ var orangeButton = new Button({
     label: "Orange",
     onClick: function() {
         currentScene = "orange";
+        background(255, 255, 255);
+        christmasTree(color(222, 149, 31));
     }
 });
 
@@ -231,6 +235,8 @@ var yellowButton = new Button({
     label: "Yellow",
     onClick: function() {
         currentScene = "yellow";
+        background(255, 255, 255);
+        christmasTree(color(247, 232, 19));
     }
 });
 
@@ -240,6 +246,8 @@ var greenButton = new Button({
     label: "Green",
     onClick: function() {
         currentScene = "green";
+        background(255, 255, 255);
+        christmasTree(color(37, 82, 0));
     }
 });
 
@@ -249,6 +257,8 @@ var blueButton = new Button({
     label: "Blue",
     onClick: function() {
         currentScene = "blue";
+        background(255, 255, 255);
+        christmasTree(color(43, 61, 217));
     }
 });
 
@@ -258,6 +268,8 @@ var purpleButton = new Button({
     label: "Purple",
     onClick: function() {
         currentScene = "purple";
+        background(255, 255, 255);
+        christmasTree(color(193, 65, 235));
     }
 });
 
@@ -291,7 +303,8 @@ var splashScreen = function ()
     textSize(15);
     text("Created by: Claudia Deverdits and Meghan Flaherty", 27, 387);
     textSize(30);
-    text("Decorate A Christmas Tree!", 18, 50);
+    fill(235, 70, 70);
+    text("Decorate A Christmas Tree!", 21, 59);
     drawBit(217,260,80);
     drawBitmoji(82, 260, 40);
     redButton.draw();
