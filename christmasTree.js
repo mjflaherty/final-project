@@ -1,5 +1,4 @@
 //paste christmas tree code in here once completed with 1 task
-
 //meghan's bitmoji code
 var x = 100;
 var y = 100;
@@ -148,7 +147,7 @@ var currentScene = "splash";
 
 background(209, 209, 209);
 
-//function to draw christmas tree (no need for parameters yet bc tree doesn't need to ever be moved)
+//function to draw christmas tree takes a color parameter to be able to change the color with the different buttons
 var christmasTree = function(treeColor){
 noStroke();
 fill(77, 73, 66);
@@ -159,9 +158,6 @@ triangle(50, 240, 350, 240, 200, 75);
 triangle(25, 320, 375, 320, 200, 130);
 image(getImage("space/star"), 153, -17);
 };
-
-//call the function to make it draw
-
 
 //array of ornaments
 var ornaments = [
@@ -187,11 +183,11 @@ var Button = function(config) {
 };
 
 Button.prototype.draw = function() {
-    fill(90, 227, 245);
+    fill(217, 217, 217);
     rect(this.x, this.y, this.width, this.height, 5);
     fill(0, 0, 0);
     textSize(19);
-    textAlign(LEFT, TOP);
+    textAlign(TOP, TOP);
     text(this.label, this.x+10, this.y+this.height/4);
 };
 
@@ -212,7 +208,7 @@ var redButton = new Button({
     y: 200,
     label: "Red",
     onClick: function() {
-        currentScene = "red";
+        currentScene = "tree";
         background(255, 255, 255);
         christmasTree(color(179, 69, 69));
     }
@@ -223,7 +219,7 @@ var orangeButton = new Button({
     y: 260,
     label: "Orange",
     onClick: function() {
-        currentScene = "orange";
+        currentScene = "tree";
         background(255, 255, 255);
         christmasTree(color(222, 149, 31));
     }
@@ -234,7 +230,7 @@ var yellowButton = new Button({
     y: 320,
     label: "Yellow",
     onClick: function() {
-        currentScene = "yellow";
+        currentScene = "tree";
         background(255, 255, 255);
         christmasTree(color(247, 232, 19));
     }
@@ -245,7 +241,7 @@ var greenButton = new Button({
     y: 200,
     label: "Green",
     onClick: function() {
-        currentScene = "green";
+        currentScene = "tree";
         background(255, 255, 255);
         christmasTree(color(37, 82, 0));
     }
@@ -256,7 +252,7 @@ var blueButton = new Button({
     y: 260,
     label: "Blue",
     onClick: function() {
-        currentScene = "blue";
+        currentScene = "tree";
         background(255, 255, 255);
         christmasTree(color(43, 61, 217));
     }
@@ -267,7 +263,7 @@ var purpleButton = new Button({
     y: 320,
     label: "Purple",
     onClick: function() {
-        currentScene = "purple";
+        currentScene = "tree";
         background(255, 255, 255);
         christmasTree(color(193, 65, 235));
     }
@@ -278,6 +274,7 @@ mouseClicked = function (){
         //every time mouse is clicked, random image from ornaments array is put on the screen
         image(ornaments[round(random(0,ornaments.length))],mouseX - 10, mouseY - 10, 30, 30);
     }
+    
     redButton.handleMouseClick();
     orangeButton.handleMouseClick();
     yellowButton.handleMouseClick();
@@ -286,26 +283,30 @@ mouseClicked = function (){
     purpleButton.handleMouseClick();
 };
 
-var smallTree = function (j,y) 
- {
+var smallTree = function (j, y){
     noStroke();
-        fill(37,82,0);
-        triangle(53+j,72+y,29+j,134+y,76+j,134+y);
-        fill(77,73,66);
-        rect(46 + j,133 + y,11,17);
-    
+    fill(37, 82, 0);
+    triangle(0 + j, 72 + y, -24 + j, 134 + y, 22 + j, 134 + y);
+    fill(77, 73, 66);
+    rect(-6 + j, 133 + y, 11, 17);
  };
- 
   
-var splashScreen = function () 
-{
+var splashScreen = function (){
     background(255, 255, 255);
+    fill(48, 45, 45);
     textSize(15);
-    text("Created by: Claudia Deverdits and Meghan Flaherty", 27, 387);
+    text("Created by: Claudia Deverdits and Meghan Flaherty", 27, 395);
+    textAlign(CENTER, CENTER);
+    text("Welcome to the game! Please select the color of tree you would like to decorate.", 79, 156, 243, 100);
     textSize(30);
     fill(235, 70, 70);
-    text("Decorate A Christmas Tree!", 21, 59);
-    drawBit(217,260,80);
+    text("Decorate A Christmas Tree!", 203, 47);
+    
+    for(var i = 0; i < 200; i++){
+      smallTree(50 * i, 0);
+    }
+    
+    drawBit(217, 260, 80);
     drawBitmoji(82, 260, 40);
     redButton.draw();
     orangeButton.draw();
@@ -313,12 +314,6 @@ var splashScreen = function ()
     greenButton.draw();
     blueButton.draw();
     purpleButton.draw();
-    for (var i = 0; i < 266; i++)
-  {
-      smallTree(62*i,0);
-  }
-    text("Welcome to the game! Please select the color of tree you would like to decorate.",96,162,250,100);
- 
 };
 
 splashScreen();
