@@ -160,19 +160,25 @@ image(getImage("space/star"), 153, -17);
 };
 
 //array of ornaments
-var ornaments = [
+var gemOrnaments = [
+    getImage("cute/GemBlue"),
+    getImage("cute/GemGreen"),
+    getImage("cute/GemOrange")
+    ];
+
+var spunkyOrnaments = [
     getImage("avatars/spunky-sam"),
     getImage("avatars/spunky-sam-green"),
     getImage("avatars/spunky-sam-orange"),
-    getImage("avatars/spunky-sam-red"),
-    getImage("cute/GemBlue"),
-    getImage("cute/GemGreen"),
-    getImage("cute/GemOrange"), 
+    getImage("avatars/spunky-sam-red")
+    ];
+
+var piOrnaments = [
     getImage("avatars/purple-pi"), 
     getImage("avatars/purple-pi-pink"), 
     getImage("avatars/purple-pi-teal")
     ];
-
+    
 var Button = function(config) {
     this.x = config.x || 0;
     this.y = config.y || 0;
@@ -214,6 +220,44 @@ var goBackButton = new Button({
     }
 });
 
+var currentOrnament = 0;
+
+var gemOrnament = new Button({
+    x: 15,
+    y: 365,
+    height: 30,
+    label: "Gem",
+    onClick: function() {
+        currentOrnament = gemOrnaments[round(random(0,gemOrnaments.length))];
+    }
+});
+
+var spunkyOrnament = new Button({
+    x: 100,
+    y: 365,
+    height: 30,
+    label: "Spunky",
+    onClick: function() {
+        currentOrnament = spunkyOrnaments[round(random(0,spunkyOrnaments.length))];
+    }
+});
+
+var piOrnament = new Button({
+    x: 185,
+    y: 365,
+    height: 30,
+    label: "Pi",
+    onClick: function() {
+        currentOrnament = piOrnaments[round(random(0,piOrnaments.length))];
+    }
+});
+
+var ornamentButtons = function(){
+    piOrnament.draw();
+    gemOrnament.draw();
+    spunkyOrnament.draw();
+};
+
 var redButton = new Button({
     x: 0,
     y: 200,
@@ -223,6 +267,7 @@ var redButton = new Button({
         background(255, 255, 255);
         christmasTree(color(179, 69, 69));
         goBackButton.draw();
+        ornamentButtons();
     }
 });
 
@@ -235,6 +280,7 @@ var orangeButton = new Button({
         background(255, 255, 255);
         christmasTree(color(222, 149, 31));
         goBackButton.draw();
+        ornamentButtons();
     }
 });
 
@@ -247,6 +293,7 @@ var yellowButton = new Button({
         background(255, 255, 255);
         christmasTree(color(247, 232, 19));
         goBackButton.draw();
+        ornamentButtons();
     }
 });
 
@@ -259,6 +306,7 @@ var greenButton = new Button({
         background(255, 255, 255);
         christmasTree(color(37, 82, 0));
         goBackButton.draw();
+        ornamentButtons();
     }
 });
 
@@ -271,6 +319,7 @@ var blueButton = new Button({
         background(255, 255, 255);
         christmasTree(color(43, 61, 217));
         goBackButton.draw();
+        ornamentButtons();
     }
 });
 
@@ -283,6 +332,7 @@ var purpleButton = new Button({
         background(255, 255, 255);
         christmasTree(color(193, 65, 235));
         goBackButton.draw();
+        ornamentButtons();
     }
 });
 
@@ -319,15 +369,6 @@ var splashScreen = function (){
     purpleButton.draw();
 };
 
-var colorScreen = function () 
-{
-    redButton.draw();
-    orangeButton.draw();
-    yellowButton.draw();
-    greenButton.draw();
-    blueButton.draw();
-    purpleButton.draw();
-};
 //if the current scene is splash then draw the splash screen (currently doesn't work when go back button is clicked)
 if(currentScene === "splash"){
 splashScreen();
@@ -340,9 +381,13 @@ mouseClicked = function (){
         } 
   //everytime mouse clicked, random image from ornaments array is put on screen
         if(currentScene !== "splash" && mouseX > 30 && mouseX < 370 && mouseY > 50 && mouseY < 320){
-            image(ornaments[round(random(0,ornaments.length))],mouseX - 10, mouseY - 10, 30, 30);
+            image(currentOrnament,mouseX - 10, mouseY - 10, 30, 30);
         }  
-        
+    if(currentScene !== "splash"){
+        gemOrnament.handleMouseClick();
+        spunkyOrnament.handleMouseClick();
+        piOrnament.handleMouseClick();
+    }
     
     //make it so the buttons only work when on the splash screen
     else if(currentScene === "splash"){
