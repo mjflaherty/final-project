@@ -319,20 +319,31 @@ var splashScreen = function (){
     purpleButton.draw();
 };
 
+var colorScreen = function () 
+{
+    redButton.draw();
+    orangeButton.draw();
+    yellowButton.draw();
+    greenButton.draw();
+    blueButton.draw();
+    purpleButton.draw();
+};
 //if the current scene is splash then draw the splash screen (currently doesn't work when go back button is clicked)
 if(currentScene === "splash"){
 splashScreen();
 }
 
 mouseClicked = function (){
-    if(currentScene !== "splash"){
+    if(currentScene !== "splash" &&  mouseX > 15 && mouseX < 115 && mouseY > 15 && mouseY < 65){
         goBackButton.handleMouseClick();
-        
-        //everytime mouse clicked, random image from ornaments array is put on screen
-        if(mouseX > 30 && mouseX < 370 && mouseY > 50 && mouseY < 320){
+        splashScreen();
+        } 
+  //everytime mouse clicked, random image from ornaments array is put on screen
+        if(currentScene !== "splash" && mouseX > 30 && mouseX < 370 && mouseY > 50 && mouseY < 320){
             image(ornaments[round(random(0,ornaments.length))],mouseX - 10, mouseY - 10, 30, 30);
-        }
-    }
+        }  
+        
+    
     //make it so the buttons only work when on the splash screen
     else if(currentScene === "splash"){
         redButton.handleMouseClick();
