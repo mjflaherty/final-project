@@ -203,6 +203,17 @@ Button.prototype.handleMouseClick = function() {
         this.onClick();
     }
 };
+//button appears on tree screen and is called in each color button's onClick property. changes the scene to splash so that splash screen is drawn but doesn't currently work.
+var goBackButton = new Button({
+    x: 15,
+    y: 15,
+    width: 100,
+    label: "Go Back",
+    onClick: function() {
+        currentScene = "splash";
+    }
+});
+
 var redButton = new Button({
     x: 0,
     y: 200,
@@ -211,6 +222,7 @@ var redButton = new Button({
         currentScene = "tree";
         background(255, 255, 255);
         christmasTree(color(179, 69, 69));
+        goBackButton.draw();
     }
 });
 
@@ -222,6 +234,7 @@ var orangeButton = new Button({
         currentScene = "tree";
         background(255, 255, 255);
         christmasTree(color(222, 149, 31));
+        goBackButton.draw();
     }
 });
 
@@ -233,6 +246,7 @@ var yellowButton = new Button({
         currentScene = "tree";
         background(255, 255, 255);
         christmasTree(color(247, 232, 19));
+        goBackButton.draw();
     }
 });
 
@@ -244,6 +258,7 @@ var greenButton = new Button({
         currentScene = "tree";
         background(255, 255, 255);
         christmasTree(color(37, 82, 0));
+        goBackButton.draw();
     }
 });
 
@@ -255,6 +270,7 @@ var blueButton = new Button({
         currentScene = "tree";
         background(255, 255, 255);
         christmasTree(color(43, 61, 217));
+        goBackButton.draw();
     }
 });
 
@@ -266,22 +282,9 @@ var purpleButton = new Button({
         currentScene = "tree";
         background(255, 255, 255);
         christmasTree(color(193, 65, 235));
+        goBackButton.draw();
     }
 });
-
-mouseClicked = function (){
-    if(currentScene !== "splash"){
-        //every time mouse is clicked, random image from ornaments array is put on the screen
-        image(ornaments[round(random(0,ornaments.length))],mouseX - 10, mouseY - 10, 30, 30);
-    }
-    
-    redButton.handleMouseClick();
-    orangeButton.handleMouseClick();
-    yellowButton.handleMouseClick();
-    greenButton.handleMouseClick();
-    blueButton.handleMouseClick();
-    purpleButton.handleMouseClick();
-};
 
 var smallTree = function (j, y){
     noStroke();
@@ -290,7 +293,7 @@ var smallTree = function (j, y){
     fill(77, 73, 66);
     rect(-6 + j, 133 + y, 11, 17);
  };
-  
+
 var splashScreen = function (){
     background(255, 255, 255);
     fill(48, 45, 45);
@@ -316,4 +319,27 @@ var splashScreen = function (){
     purpleButton.draw();
 };
 
+//if the current scene is splash then draw the splash screen (currently doesn't work when go back button is clicked)
+if(currentScene === "splash"){
 splashScreen();
+}
+
+mouseClicked = function (){
+    if(currentScene !== "splash"){
+        goBackButton.handleMouseClick();
+        
+        //everytime mouse clicked, random image from ornaments array is put on screen
+        if(mouseX > 30 && mouseX < 370 && mouseY > 50 && mouseY < 320){
+            image(ornaments[round(random(0,ornaments.length))],mouseX - 10, mouseY - 10, 30, 30);
+        }
+    }
+    //make it so the buttons only work when on the splash screen
+    else if(currentScene === "splash"){
+        redButton.handleMouseClick();
+        orangeButton.handleMouseClick();
+        yellowButton.handleMouseClick();
+        greenButton.handleMouseClick();
+        blueButton.handleMouseClick();
+        purpleButton.handleMouseClick();
+    }
+};
