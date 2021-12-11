@@ -157,6 +157,9 @@ triangle(90, 160, 310, 160, 200, 45);
 triangle(50, 240, 350, 240, 200, 75);
 triangle(25, 320, 375, 320, 200, 130);
 image(getImage("space/star"), 153, -17);
+fill(0,0,0);
+textSize(10);
+text("Everytime you click the button, the color of the ornament will change!",15,320,150,50);
 };
 
 //array of ornaments
@@ -228,7 +231,7 @@ var gemOrnament = new Button({
     height: 30,
     label: "Gem",
     onClick: function() {
-        currentOrnament = gemOrnaments[round(random(0,gemOrnaments.length))];
+        currentOrnament = gemOrnaments[round(random(0,gemOrnaments.length - 1))];
     }
 });
 
@@ -238,7 +241,7 @@ var spunkyOrnament = new Button({
     height: 30,
     label: "Spunky",
     onClick: function() {
-        currentOrnament = spunkyOrnaments[round(random(0,spunkyOrnaments.length))];
+        currentOrnament = spunkyOrnaments[round(random(0,spunkyOrnaments.length - 1))];
     }
 });
 
@@ -248,7 +251,8 @@ var piOrnament = new Button({
     height: 30,
     label: "Pi",
     onClick: function() {
-        currentOrnament = piOrnaments[round(random(0,piOrnaments.length))];
+       currentOrnament = piOrnaments[round(random(0,piOrnaments.length - 1))];
+       
     }
 });
 
