@@ -145,22 +145,29 @@ var drawBitmoji = function(bitmojiX, bitmojiY, h){
 
 var currentScene = "splash";
 
-background(209, 209, 209);
-
+//function to draw the present onto the tree screen
 var present = function(){
-noStroke();
-fill(90, 189, 94);
-triangle(294, 346, 308, 329, 325, 351);
-triangle(354, 347, 340, 329, 323, 351);
-fill(255, 0, 0);
-rect(300, 350, 50, 50);
-fill(90, 189, 94);
-rect(318, 350, 12, 54);
-rect(300, 367, 50, 15);
+    noStroke();
+    fill(90, 189, 94);
+    triangle(294, 346, 308, 329, 325, 351);
+    triangle(354, 347, 340, 329, 323, 351);
+    fill(255, 0, 0);
+    rect(300, 350, 50, 50);
+    fill(90, 189, 94);
+    rect(318, 350, 12, 54);
+    rect(300, 367, 50, 15);
 };
 
 //function to draw christmas tree takes a color parameter to be able to change the color with the different buttons
 var christmasTree = function(treeColor){
+    //draw background
+    for(var i = 0; i < 400; i++){
+        noStroke();
+        fill(255, 138, 138);
+        rect(-1, i * 60, 401, 29);
+    }
+    
+    //draw actual christmas tree
     noStroke();
     fill(77, 73, 66);
     rect(170, 264, 64, 100);
@@ -170,11 +177,11 @@ var christmasTree = function(treeColor){
     triangle(25, 320, 375, 320, 200, 130);
     fill(0,0,0);
     textSize(10);
-    text("Everytime you click the button, the color of the ornament will change!",15,320,150,50);
+    text("Everytime you click the button, the color of the ornament will change!",15,326,150,50);
     present();
 };
 
-//array of ornaments
+//3 arrays of ornaments
 var gemOrnaments = [
     getImage("cute/GemBlue"),
     getImage("cute/GemGreen"),
@@ -224,7 +231,7 @@ Button.prototype.handleMouseClick = function() {
         this.onClick();
     }
 };
-//button appears on tree screen and is called in each color button's onClick property. changes the scene to splash so that splash screen is drawn but doesn't currently work.
+//drawn on the tree screen to go back to the previous screen
 var goBackButton = new Button({
     x: 15,
     y: 15,
@@ -235,8 +242,11 @@ var goBackButton = new Button({
     }
 });
 
+//global variables to be able to change ornament and color in buttons
 var currentOrnament = 0;
+var currentColor;
 
+//ornament buttons, when pressed each one gives a random color ornament of its type
 var gemOrnament = new Button({
     x: 15,
     y: 365,
@@ -264,10 +274,10 @@ var piOrnament = new Button({
     label: "Pi",
     onClick: function() {
        currentOrnament = piOrnaments[round(random(0,piOrnaments.length - 1))];
-       
     }
 });
 
+//topper buttons, when pressed each one changes the topper appearing on top of the screen
 var starTopper = new Button({
     x: 320,
     y: 50,
@@ -297,6 +307,8 @@ var meghanTopper = new Button({
        drawBit(170,0,50);
     }
 });
+
+//function that draws all ornament and topper buttons
 var ornamentTopperButtons = function(){
     piOrnament.draw();
     gemOrnament.draw();
@@ -306,6 +318,7 @@ var ornamentTopperButtons = function(){
     meghanTopper.draw();
 };
 
+//when clicked, tree screen is redrawn, clearing it
 var clearButton = new Button({
     x: 15,
     y: 75,
@@ -314,24 +327,31 @@ var clearButton = new Button({
     onClick: function() {
        currentScene = "tree";
         background(255, 255, 255);
-        christmasTree(color(179, 69, 69));
+        christmasTree(currentColor);
         goBackButton.draw();
         ornamentTopperButtons();
         clearButton.draw();
     }
 });
 
+//function that holds universal onClick functions for the color buttons to avoid unneeded repetition
+var buttonClickFunctions = function(){
+        background(255, 255, 255);
+        christmasTree(currentColor);
+        goBackButton.draw();
+        ornamentTopperButtons();
+        clearButton.draw();
+};
+
+//each color button calls the buttonClickFunctions function, changes the currentScene and the currentColor
 var redButton = new Button({
     x: 0,
     y: 200,
     label: "Red",
     onClick: function() {
         currentScene = "tree";
-        background(255, 255, 255);
-        christmasTree(color(179, 69, 69));
-        goBackButton.draw();
-        ornamentTopperButtons();
-        clearButton.draw();
+        currentColor = color(179, 69, 69);
+        buttonClickFunctions();
     }
 });
 
@@ -341,11 +361,8 @@ var orangeButton = new Button({
     label: "Orange",
     onClick: function() {
         currentScene = "tree";
-        background(255, 255, 255);
-        christmasTree(color(222, 149, 31));
-        goBackButton.draw();
-        ornamentTopperButtons();
-        clearButton.draw();
+        currentColor = color(222, 149, 31);
+        buttonClickFunctions();
     }
 });
 
@@ -355,11 +372,8 @@ var yellowButton = new Button({
     label: "Yellow",
     onClick: function() {
         currentScene = "tree";
-        background(255, 255, 255);
-        christmasTree(color(247, 232, 19));
-        goBackButton.draw();
-        ornamentTopperButtons();
-        clearButton.draw();
+        currentColor = color(247, 232, 19);
+        buttonClickFunctions();
     }
 });
 
@@ -369,11 +383,8 @@ var greenButton = new Button({
     label: "Green",
     onClick: function() {
         currentScene = "tree";
-        background(255, 255, 255);
-        christmasTree(color(37, 82, 0));
-        goBackButton.draw();
-        ornamentTopperButtons();
-        clearButton.draw();
+        currentColor = color(37, 82, 0);
+        buttonClickFunctions();
     }
 });
 
@@ -383,11 +394,8 @@ var blueButton = new Button({
     label: "Blue",
     onClick: function() {
         currentScene = "tree";
-        background(255, 255, 255);
-        christmasTree(color(43, 61, 217));
-        goBackButton.draw();
-        ornamentTopperButtons();
-        clearButton.draw();
+        currentColor = color(43, 61, 217);
+        buttonClickFunctions();
     }
 });
 
@@ -397,14 +405,12 @@ var purpleButton = new Button({
     label: "Purple",
     onClick: function() {
         currentScene = "tree";
-        background(255, 255, 255);
-        christmasTree(color(193, 65, 235));
-        goBackButton.draw();
-        ornamentTopperButtons();
-        clearButton.draw();
+        currentColor = color(193, 65, 235);
+        buttonClickFunctions();
     }
 });
 
+//function to draw the small repeating trees that appear on the splash screen
 var smallTree = function (j, y){
     noStroke();
     fill(37, 82, 0);
@@ -417,17 +423,19 @@ var splashScreen = function (){
     background(255, 255, 255);
     fill(48, 45, 45);
     textSize(15);
-    text("Created by: Claudia Deverdits and Meghan Flaherty", 27, 395);
+    text("Created by: Claudia Deverdits and Meghan Flaherty", 27, 165);
     textAlign(CENTER, CENTER);
     text("Welcome to the game! Please select the color of tree you would like to decorate.", 79, 156, 243, 100);
     textSize(30);
     fill(235, 70, 70);
     text("Decorate A Christmas Tree!", 203, 47);
     
+    //calls the smallTree function to repeatedly draw the trees on the splash screen
     for(var i = 0; i < 200; i++){
       smallTree(50 * i, 0);
     }
     
+    //calling all bitmojis and drawing all the color buttons
     drawBit(217, 260, 80);
     drawBitmoji(82, 260, 40);
     redButton.draw();
@@ -438,20 +446,22 @@ var splashScreen = function (){
     purpleButton.draw();
 };
 
-//if the current scene is splash then draw the splash screen (currently doesn't work when go back button is clicked)
+//if the current scene is splash then draw the splash screen
 if(currentScene === "splash"){
-splashScreen();
+    splashScreen();
 }
 
 mouseClicked = function (){
+    //if the current scene is not splash and the mouse clicks in a certain area, the splash screen is drawn again
     if(currentScene !== "splash" &&  mouseX > 15 && mouseX < 115 && mouseY > 15 && mouseY < 65){
         goBackButton.handleMouseClick();
         splashScreen();
         } 
   //everytime mouse clicked, random image from ornaments array is put on screen
-        if(currentScene !== "splash" && !(mouseX > 320 && mouseX < 400 && mouseY > 0 && mouseY < 150) && !(mouseX > 0 && mouseX < 400 && mouseY > 320 && mouseY < 400)){
+    if(currentScene !== "splash" && !(mouseX > 320 && mouseX < 400 && mouseY > 0 && mouseY < 150) && !(mouseX > 0 && mouseX < 400 && mouseY > 320 && mouseY < 400)){
             image(currentOrnament,mouseX - 10, mouseY - 10, 30, 30);
-        }  
+    }  
+    //if the current scene is not splash, handle the mouse click of all buttons appearing on the tree screen
     if(currentScene !== "splash"){
         gemOrnament.handleMouseClick();
         spunkyOrnament.handleMouseClick();
@@ -462,7 +472,7 @@ mouseClicked = function (){
         clearButton.handleMouseClick();
     }
     
-    //make it so the buttons only work when on the splash screen
+    //color buttons only have function if the current scene is splash
     else if(currentScene === "splash"){
         redButton.handleMouseClick();
         orangeButton.handleMouseClick();
