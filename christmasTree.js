@@ -147,18 +147,31 @@ var currentScene = "splash";
 
 background(209, 209, 209);
 
+var present = function(){
+noStroke();
+fill(90, 189, 94);
+triangle(294, 346, 308, 329, 325, 351);
+triangle(354, 347, 340, 329, 323, 351);
+fill(255, 0, 0);
+rect(300, 350, 50, 50);
+fill(90, 189, 94);
+rect(318, 350, 12, 54);
+rect(300, 367, 50, 15);
+};
+
 //function to draw christmas tree takes a color parameter to be able to change the color with the different buttons
 var christmasTree = function(treeColor){
-noStroke();
-fill(77, 73, 66);
-rect(170, 264, 64, 100);
-fill(treeColor);
-triangle(90, 160, 310, 160, 200, 45);
-triangle(50, 240, 350, 240, 200, 75);
-triangle(25, 320, 375, 320, 200, 130);
-fill(0,0,0);
-textSize(10);
-text("Everytime you click the button, the color of the ornament will change!",15,320,150,50);
+    noStroke();
+    fill(77, 73, 66);
+    rect(170, 264, 64, 100);
+    fill(treeColor);
+    triangle(90, 160, 310, 160, 200, 45);
+    triangle(50, 240, 350, 240, 200, 75);
+    triangle(25, 320, 375, 320, 200, 130);
+    fill(0,0,0);
+    textSize(10);
+    text("Everytime you click the button, the color of the ornament will change!",15,320,150,50);
+    present();
 };
 
 //array of ornaments
@@ -262,7 +275,6 @@ var starTopper = new Button({
     label: "Star",
     onClick: function() {
        image(getImage("space/star"), 153, -17);
-       
     }
 });
 
@@ -273,7 +285,6 @@ var claudiaTopper = new Button({
     label: "Claudia",
     onClick: function() {
        drawBitmoji(163,0,25);
-       
     }
 });
 
@@ -284,7 +295,6 @@ var meghanTopper = new Button({
     label: "Meghan",
     onClick: function() {
        drawBit(170,0,50);
-       
     }
 });
 var ornamentTopperButtons = function(){
@@ -308,7 +318,6 @@ var clearButton = new Button({
         goBackButton.draw();
         ornamentTopperButtons();
         clearButton.draw();
-       
     }
 });
 
@@ -440,7 +449,7 @@ mouseClicked = function (){
         splashScreen();
         } 
   //everytime mouse clicked, random image from ornaments array is put on screen
-        if(currentScene !== "splash" && mouseX > 30 && mouseX < 370 && mouseY > 50 && mouseY < 320 && mouseX > 100 && mouseX < 300){
+        if(currentScene !== "splash" && !(mouseX > 320 && mouseX < 400 && mouseY > 0 && mouseY < 150) && !(mouseX > 0 && mouseX < 400 && mouseY > 320 && mouseY < 400)){
             image(currentOrnament,mouseX - 10, mouseY - 10, 30, 30);
         }  
     if(currentScene !== "splash"){
